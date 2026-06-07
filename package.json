@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "encrypt": "staticrypt dist/index.html --short -d dist",
+    "encrypt": "staticrypt dist/index.html --short -d dist --template-title \"Occupide — private preview\"",
+    "postencrypt": "node scripts/noindex.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
