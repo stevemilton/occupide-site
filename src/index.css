@@ -1,0 +1,5 @@
+/* Occupide marketing landing — global entry.
+   Pulls in the design-system foundations, then the marketing styles. */
+@import './styles/colors_and_type.css';
+@import './styles/components.css';
+@import './styles/site.css';
