@@ -26,6 +26,10 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+      - name: Password-protect the site (StatiCrypt)
+        env:
+          STATICRYPT_PASSWORD: ${{ secrets.SITE_PASSWORD }}
+        run: npm run encrypt
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

@@ -6,6 +6,23 @@ solutions provider, powered by an AI-optimised operating system*.
 Built with **React + TypeScript + Vite**, on the Occupide design system (`src/styles/`,
 extracted from the Claude Design handoff bundle). Icons via `lucide-react`.
 
+Deployed to GitHub Pages from `main` via Actions — **https://stevemilton.github.io/occupide-site/**.
+
+## Password protection
+
+The published site is gated by a shared password. GitHub Pages has no server, so the page is
+**encrypted at rest** with [StatiCrypt](https://github.com/robinmoisson/staticrypt): the app is
+bundled into a single self-contained `index.html` (`vite-plugin-singlefile`) and then AES-encrypted
+— visitors must enter the password to decrypt and view anything.
+
+- The password lives **only** in the repo secret `SITE_PASSWORD` (Settings → Secrets → Actions),
+  never in source. The CI `encrypt` step reads it as `STATICRYPT_PASSWORD`.
+- To change it: `gh secret set SITE_PASSWORD --body "newpass" --repo stevemilton/occupide-site`,
+  then re-run the workflow (push, or `gh workflow run deploy.yml`).
+- Caveat: this is a *shared-password gate*, not per-user auth. The encrypted payload is public, so a
+  weak password is brute-forceable offline. For real access control, host behind Cloudflare Access
+  or a Worker with auth instead.
+
 ## Run
 
 ```bash
